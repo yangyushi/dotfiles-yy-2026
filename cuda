@@ -1,0 +1,27 @@
+# =====================================================================
+#  Be careful, you have to manually setup these CUDA related versions.
+# =====================================================================
+
+PREFIX_USER=$HOME/.local
+CUDNN_VERSION=9.5.1
+CUDA_VERSION=12.4
+TRT_VERSION=10.5.0.18
+
+# user space prefix
+export PATH=$PREFIX_USER/bin:$PATH
+export LD_LIBRARY_PATH=$PREFIX_USER/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PREFIX_USER/lib64
+export LIBRARY_PATH=$PREFIX_USER/lib
+export LIBRARY_PATH=$PREFIX_USER/lib64
+
+# for CUDA, CUDNN and TensorRT
+export PATH=$PREFIX_USER/cuda-$CUDA_VERSION/bin:$PATH
+export PATH=$PREFIX_USER/tensorrt-$TRT_VERSION/bin:$PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PREFIX_USER/cuda-$CUDA_VERSION/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PREFIX_USER/cuda-$CUDA_VERSION/extras/CUPTI/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PREFIX_USER/cudnn-$CUDNN_VERSION/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PREFIX_USER/tensorrt-$TRT_VERSION/lib
+export LIBRARY_PATH=$LIBRARY_PATH:$PREFIX_USER/cuda-$CUDA_VERSION/lib64
+export LIBRARY_PATH=$LIBRARY_PATH:$PREFIX_USER/cudnn-$CUDNN_VERSION/lib
+export LIBRARY_PATH=$LIBRARY_PATH:$PREFIX_USER/tensorrt-$TRT_VERSION/lib
+export XLA_FLAGS=--xla_gpu_cuda_data_dir=$PREFIX_USER/cuda-$CUDA_VERSION
